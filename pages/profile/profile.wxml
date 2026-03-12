@@ -1,0 +1,153 @@
+<!--pages/profile/profile.wxml-->
+<navigation-bar 
+  title="个人中心" 
+  back="{{false}}" 
+  background="#ADD5A2"
+  color="#FFFFFF"
+></navigation-bar>
+
+<scroll-view class="profile-container" scroll-y enable-back-to-top>
+  
+  <!-- 个人信息卡片 - 点击登录 -->
+  <view class="user-card" bindtap="onUserCardTap">
+    <view class="user-header">
+      <view class="avatar-section">
+        <image src="{{userInfo.avatar}}" mode="aspectFill" class="avatar-img" />
+        <!-- 只在登录状态下显示编辑按钮 -->
+        <view class="edit-avatar-btn" wx:if="{{isLoggedIn}}" bindtap="onEditAvatar" catchtap>
+          <text class="edit-icon">📸</text>
+        </view>
+      </view>
+      
+      <view class="user-info-section">
+        <view class="name-section">
+          <text class="user-name">{{userInfo.nickname}}</text>
+          <!-- 只在登录状态下显示编辑按钮 -->
+          <view class="edit-name-btn" wx:if="{{isLoggedIn}}" bindtap="onEditNickname" catchtap>
+            <text class="edit-icon">✏️</text>
+          </view>
+        </view>
+        <text class="user-level">{{userInfo.level}}</text>
+        <text class="user-bio">{{userInfo.bio}}</text>
+      </view>
+    </view>
+
+    <!-- 美食记录统计 -->
+    <view class="stats-section">
+      <view class="stat-item">
+        <text class="stat-number">{{foodStats.shares}}</text>
+        <text class="stat-label">记录美食</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number">{{foodStats.favorites}}</text>
+        <text class="stat-label">收藏美食</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number">{{foodStats.likes}}</text>
+        <text class="stat-label">获得点赞</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number">{{foodStats.followers}}</text>
+        <text class="stat-label">粉丝</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 最近记录 - 只在登录状态下显示 -->
+  <view class="recent-shares-section" wx:if="{{isLoggedIn && recentShares.length > 0}}">
+    <view class="section-header">
+      <text class="section-title">最近记录</text>
+      <text class="section-more" bindtap="onNavigateToFunction" data-path="/pages/feedbackHistory/feedbackHistory" data-title="记录历史">查看更多 ></text>
+    </view>
+    
+    <scroll-view class="shares-scroll" scroll-x>
+      <view class="shares-list">
+        <view 
+          class="share-item" 
+          wx:for="{{recentShares}}" 
+          wx:key="id"
+          bindtap="onViewShareDetail"
+          data-share="{{item}}"
+        >
+          <view class="share-icon">{{item.icon}}</view>
+          <text class="share-name">{{item.dishName}}</text>
+          <text class="share-time">{{item.time}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 我的功能 -->
+  <view class="function-section">
+    <view class="section-header">
+      <text class="section-title">我的功能</text>
+    </view>
+    
+    <view class="function-list">
+      <view 
+        class="function-item" 
+        wx:for="{{myFunctions}}" 
+        wx:key="id"
+        bindtap="onMyFunctionTap"
+        data-path="{{item.path}}"
+        data-action="{{item.action}}"
+        data-id="{{item.id}}"
+      >
+        <view class="item-left">
+          <text class="item-icon" style="color: {{item.color}}">{{item.icon}}</text>
+          <text class="item-text">{{item.name}}</text>
+        </view>
+        <text class="item-arrow">></text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 系统设置 -->
+  <view class="system-section">
+    <view class="section-header">
+      <text class="section-title">系统设置</text>
+    </view>
+    
+    <view class="system-list">
+      <view 
+        class="system-item" 
+        wx:for="{{systemSettings}}" 
+        wx:key="id"
+        bindtap="onSystemSettingTap"
+        data-action="{{item.action}}"
+        data-id="{{item.id}}"
+      >
+        <view class="item-left">
+          <text class="item-icon">{{item.icon}}</text>
+          <text class="item-text">{{item.name}}</text>
+        </view>
+        <text class="item-arrow" wx:if="{{!item.value}}">></text>
+        <text class="item-value" wx:if="{{item.value}}">{{item.value}}</text>
+      </view>
+      
+      <!-- 登录状态下显示退出登录 -->
+      <view 
+        class="system-item" 
+        wx:if="{{isLoggedIn}}"
+        bindtap="onLogout"
+      >
+        <view class="item-left">
+          <text class="item-icon">🚪</text>
+          <text class="item-text" style="color: #FF6B6B;">退出登录</text>
+        </view>
+        <text class="item-arrow">></text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 未登录时的提示 -->
+  <view class="empty-tips" wx:if="{{!isLoggedIn}}">
+    <view class="empty-img"></view>
+    <text class="empty-title">登录后享受完整功能</text>
+    <text class="empty-desc">记录美食、收藏店铺、查看历史记录...</text>
+    <view class="empty-btn" bindtap="onUserCardTap">
+      <text>立即登录</text>
+    </view>
+  </view>
+
+</scroll-view>

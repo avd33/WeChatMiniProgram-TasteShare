@@ -1,0 +1,69 @@
+/* pages/photos/photos.wxss */
+page {
+  height: 100vh;
+  background-color: #000;
+}
+
+.photos-container {
+  height: 100vh;
+  background-color: #000;
+  position: relative;
+}
+
+.vertical-swiper {
+  width: 100%;
+  height: 100vh;
+}
+
+.swiper-item {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.photo-image {
+  width: 100%;
+  height: 100%;
+}
+
+/* 左下角收藏按钮 */
+.favorite-btn {
+  position: absolute;
+  bottom: 60rpx;
+  left: 40rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  transition: transform 0.3s ease;
+}
+
+.favorite-btn:active {
+  transform: scale(0.9);
+}
+
+.favorite-icon {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+/* 右下角索引指示器 */
+.index-indicator {
+  position: absolute;
+  bottom: 60rpx;
+  right: 40rpx;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 16rpx 30rpx;
+  border-radius: 30rpx;
+  z-index: 20;
+}
+
+.index-text {
+  color: white;
+  font-size: 30rpx;
+  font-weight: 500;
+}

@@ -1,0 +1,139 @@
+<!--pages/feedback/feedback.wxml-->
+<navigation-bar 
+  title="美食记录" 
+  back="{{false}}" 
+  background="#ADD5A2" 
+  color="#FFFFFF">
+</navigation-bar>
+
+<scroll-view class="feedback-container" scroll-y enable-back-to-top>
+
+  <form class="feedback-form" bindsubmit="handleFormSubmit">
+    
+    <!-- 美食信息区域 -->
+    <view class="form-section">
+      <view class="section-title">
+        <text>🍽️ 美食信息</text>
+      </view>
+      
+      <!-- 菜品/美食名称 -->
+      <view class="form-item">
+        <text class="item-label">菜品/美食名称</text>
+        <input 
+          class="form-input" 
+          name="dishName" 
+          placeholder="请输入菜品或美食名称" 
+          value="{{formData.dishName}}"
+          bindinput="onDishNameInput"
+          maxlength="50"
+        />
+        <text class="error-text" wx:if="{{errors.dishName}}">{{errors.dishName}}</text>
+      </view>
+
+      <!-- 美食类型多选 -->
+      <view class="form-item">
+        <text class="item-label">美食类型</text>
+        <checkbox-group class="checkbox-group" bindchange="onFoodTypeChange">
+          <view class="checkbox-row">
+            <label class="checkbox-item" wx:for="{{foodTypes}}" wx:key="value" wx:if="{{index < 3}}">
+              <checkbox value="{{item.value}}" checked="{{item.checked}}" color="#ADD5A2" />
+              <text class="checkbox-text">{{item.name}}</text>
+            </label>
+          </view>
+          <view class="checkbox-row">
+            <label class="checkbox-item" wx:for="{{foodTypes}}" wx:key="value" wx:if="{{index >= 3}}">
+              <checkbox value="{{item.value}}" checked="{{item.checked}}" color="#ADD5A2" />
+              <text class="checkbox-text">{{item.name}}</text>
+            </label>
+          </view>
+        </checkbox-group>
+        <text class="error-text" wx:if="{{errors.foodTypes}}">{{errors.foodTypes}}</text>
+      </view>
+      
+      <!-- 推荐程度单选 -->
+      <view class="form-item">
+        <text class="item-label">推荐程度</text>
+        <radio-group class="radio-group" bindchange="onRecommendationChange">
+          <label class="radio-item" wx:for="{{recommendations}}" wx:key="value">
+            <radio value="{{item.value}}" checked="{{item.checked}}" color="#ADD5A2" />
+            <text class="radio-text">{{item.name}}</text>
+          </label>
+        </radio-group>
+        <text class="error-text" wx:if="{{errors.recommendation}}">{{errors.recommendation}}</text>
+      </view>
+    </view>
+
+    <!-- 个人信息区域 -->
+    <view class="form-section">
+      <view class="section-title">
+        <text>个人信息（可选）</text>
+      </view>
+      
+      <!-- 姓名 -->
+      <view class="form-item">
+        <text class="item-label">昵称</text>
+        <input 
+          class="form-input" 
+          name="name" 
+          placeholder="请输入您的昵称（用于显示）" 
+          value="{{formData.name}}"
+          bindinput="onNameInput"
+        />
+        <text class="error-text" wx:if="{{errors.name}}">{{errors.name}}</text>
+      </view>
+      
+      <!-- 手机号 -->
+      <view class="form-item">
+        <text class="item-label">手机号（可选）</text>
+        <input 
+          class="form-input" 
+          name="phone" 
+          type="number" 
+          placeholder="请输入手机号码（用于联系）" 
+          value="{{formData.phone}}"
+          bindinput="onPhoneInput"
+          maxlength="11"
+        />
+        <text class="error-text" wx:if="{{errors.phone}}">{{errors.phone}}</text>
+      </view>
+    </view>
+
+    <!-- 详细记录区域 -->
+    <view class="form-section">
+      <view class="section-title">
+        <text>详细记录</text>
+      </view>
+      
+      <view class="form-item">
+        <textarea 
+          class="feedback-textarea" 
+          name="feedback" 
+          placeholder="请记录您的美食体验，包括菜品口味、烹饪技巧、搭配建议等...✨"
+          value="{{formData.feedback}}"
+          bindinput="onFeedbackInput"
+          maxlength="500"
+          show-confirm-bar="{{false}}"
+        />
+        <view class="word-count">
+          <text class="count-text">{{formData.feedback.length}}/500</text>
+        </view>
+        <text class="error-text" wx:if="{{errors.feedback}}">{{errors.feedback}}</text>
+      </view>
+    </view>
+
+    <!-- 提交按钮 -->
+    <view class="submit-section">
+      <button 
+        class="submit-btn" 
+        form-type="submit" 
+        type="primary" 
+        loading="{{isSubmitting}}"
+        hover-class="button-hover"
+      >
+        {{isSubmitting ? '提交中...' : '立即记录'}}
+      </button>
+      <text class="submit-tip">记录您的美食发现，让更多人了解美味！</text>
+    </view>
+
+  </form>
+</scroll-view>

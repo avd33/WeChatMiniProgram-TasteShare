@@ -1,0 +1,66 @@
+<!-- pages/hotpot/hotpot.wxml -->
+<navigation-bar 
+  title="{{categoryName}}" 
+  back="{{true}}"
+  background="#ADD5A2" 
+  color="#FFFFFF"
+></navigation-bar>
+
+<view class="hotpot-container">
+  
+
+  <!-- 分类头部 -->
+  <view class="category-header">
+    <!-- 使用可靠的图标，删除图标或使用文字 -->
+    <text class="category-emoji">🍲</text>
+    <text class="category-title">{{categoryName}}</text>
+    <text class="category-desc">麻辣鲜香，冬日必备</text>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{shopList.length === 0 && !isLoading}}">
+    <text class="empty-text">暂无{{categoryName}}店铺</text>
+  </view>
+
+  <!-- 店铺列表 -->
+  <view class="shop-list" wx:if="{{shopList.length > 0}}">
+    <view class="shop-item" 
+          wx:for="{{shopList}}" 
+          wx:key="id" 
+          bindtap="onShopItemTap" 
+          data-shop="{{item}}">
+      
+      <view class="favorite-btn" 
+            bindtap="toggleFavorite" 
+            data-shop="{{item}}"
+            catchtap>
+        <image 
+          src="{{isShopFavorite[item.id] ? 'https://img.icons8.com/ios-filled/30/FF672B/hearts.png' : 'https://img.icons8.com/ios/30/666666/hearts.png'}}"  
+          class="favorite-icon"
+        />
+      </view>
+      
+      <image src="{{item.image}}" class="shop-cover" mode="aspectFill" />
+      <view class="shop-info">
+        <view class="shop-header">
+          <text class="shop-name">{{item.name}}</text>
+          <text class="shop-rating">⭐ {{item.rating}}</text>
+        </view>
+        <text class="shop-address">{{item.address}}</text>
+        <text class="shop-price">{{item.price}}</text>
+        <view class="shop-tags">
+          <text class="tag" wx:for="{{item.tags}}" wx:key="*this">{{item}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="load-more" wx:if="{{hasMore && shopList.length > 0}}">
+    <view class="load-content">
+      <view class="loading-spinner" wx:if="{{isLoading}}"></view>
+      <text class="load-text">{{loadingText}}</text>
+    </view>
+  </view>
+
+</view>

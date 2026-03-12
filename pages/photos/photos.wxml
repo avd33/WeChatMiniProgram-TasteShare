@@ -1,0 +1,54 @@
+<!-- pages/photos/photos.wxml -->
+<navigation-bar 
+  title="美食图片" 
+  back="{{false}}" 
+  background="#ADD5A2" 
+  color="#FFFFFF"
+></navigation-bar>
+
+<view class="photos-container">
+  <swiper 
+    class="vertical-swiper"
+    vertical="{{true}}"
+    indicator-dots="{{true}}"
+    indicator-color="rgba(0,0,0,0.3)"
+    indicator-active-color="#FFD166"
+    autoplay="{{true}}"
+    interval="3000"
+    circular="{{true}}"
+    duration="500"
+    current="{{currentIndex}}"
+    bindchange="onSwiperChange">
+    
+    <swiper-item 
+      wx:for="{{photoList}}" 
+      wx:key="id"
+      data-index="{{index}}">
+      
+      <!-- 照片 -->
+      <image 
+        src="{{item.url}}" 
+        mode="aspectFill" 
+        class="photo-image" 
+        show-menu-by-longpress="{{true}}"
+        bindtap="onImageTap"
+        bindlongpress="onImageLongPress"
+        data-index="{{index}}" 
+      />
+      
+    </swiper-item>
+  </swiper>
+
+  <!-- 左下角收藏按钮 -->
+  <view class="favorite-btn" bindtap="toggleFavorite">
+    <image 
+      src="{{photoList[currentIndex] && isFavorite[photoList[currentIndex].id] ? 'https://img.icons8.com/ios-filled/40/FFB6C1/hearts.png' : 'https://img.icons8.com/ios/40/FFFFFF/hearts.png'}}" 
+      class="favorite-icon"
+    />
+  </view>
+
+  <!-- 右下角索引指示器 -->
+  <view class="index-indicator">
+    <text class="index-text">{{currentIndex + 1}}/{{photoList.length}}</text>
+  </view>
+</view>

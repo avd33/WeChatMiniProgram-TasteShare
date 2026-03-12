@@ -1,0 +1,116 @@
+<!-- pages/index/index.wxml -->
+<navigation-bar 
+  title="发现美食" 
+  back="{{false}}" 
+  color="#FFFFFF" 
+  background="#ADD5A2" 
+></navigation-bar>
+
+<view class="page-content">
+  
+  <!-- 1. 顶部广告轮播区 -->
+  <view class="swiper-container">
+    <swiper class="swiper-inner"
+      indicator-dots="{{true}}"  
+      autoplay="{{true}}"      
+      interval="3000"          
+      circular="{{true}}"     
+      indicator-active-color="#FFD166" 
+    >
+      <swiper-item 
+        wx:for="{{bannerList}}" 
+        wx:key="*this" 
+        bindtap="handleBannerTap" 
+        data-index="{{index}}"
+      >
+        <image src="{{item}}" class="swiper-img" />
+      </swiper-item>
+    </swiper>
+  </view>
+ 
+  <!-- 2. 搜索栏区域 -->
+  <view class="search-bar-container">
+    <view class="search-bar" bindtap="onSearchTap">
+      <view class="search-bar-inner">
+        <!-- 搜索图标 -->
+        <text class="search-icon">🔍</text>
+        <!-- 搜索提示文本 -->
+        <text class="search-placeholder">搜索美食、店铺或菜系...</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 3. 美食分类九宫格 -->
+  <view class="category-title">美食分类</view>
+  <view class="grid-container">
+    <view 
+      class="grid-item" 
+      wx:for="{{gridList}}" 
+      wx:key="id"  
+      bindtap="handleCategoryTap" 
+      data-category="{{item.name}}"  
+    >
+      <view class="emoji-container">
+        <text class="category-emoji">{{item.emoji}}</text>
+      </view>
+      <text class="grid-text">{{item.name}}</text>
+    </view>
+  </view>
+  
+  <!-- 4. 推荐美食列表 -->
+  <view class="shop-list-section">
+    <view class="section-title">
+      推荐美食
+    </view>
+    
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{shopList.length === 0 && !isLoading}}">
+      <text class="empty-text">暂无美食推荐</text>
+    </view>
+    
+    <!-- 美食列表 -->
+    <view class="shop-list" wx:if="{{shopList.length > 0}}">
+      <view class="shop-item" 
+            wx:for="{{shopList}}" 
+            wx:key="id" 
+            bindtap="onShopItemTap" 
+            data-shop="{{item}}">
+        
+        <!-- 收藏按钮（使用网络图标，参考视频页面方法） -->
+        <view class="favorite-btn" 
+              bindtap="toggleFavorite" 
+              data-shop="{{item}}"
+              catchtap>
+          <image 
+            src="{{isShopFavorite[item.id] ? 'https://img.icons8.com/ios-filled/30/FF672B/hearts.png' : 'https://img.icons8.com/ios/30/666666/hearts.png'}}" 
+            class="favorite-icon"
+          />
+        </view>
+        
+        <image src="{{item.image}}" class="shop-cover" mode="aspectFill" />
+        <view class="shop-info">
+          <text class="shop-name">{{item.name}}</text>
+          <text class="shop-address">{{item.address}}</text>
+          <view class="shop-meta">
+            <text class="shop-phone">{{item.phone}}</text>
+            <text class="shop-hours">{{item.businessHours}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 加载更多提示 -->
+    <view class="load-more" wx:if="{{hasMore && shopList.length > 0}}">
+      <view class="load-content">
+        <view class="loading-spinner" wx:if="{{isLoading}}"></view>
+        <text class="load-text">{{loadingText}}</text>
+      </view>
+    </view>
+    
+    <!-- 没有更多提示 -->
+    <view class="no-more" wx:if="{{!hasMore && shopList.length > 0}}">
+      <text class="no-more-text">------ 已显示全部内容 ------</text>
+    </view>
+  </view>
+  
+</view>

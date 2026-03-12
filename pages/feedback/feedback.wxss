@@ -1,0 +1,383 @@
+/* pages/feedback/feedback.wxss */
+page {
+  background: linear-gradient(135deg, #F0F9F0, #E8F5E8);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.feedback-container {
+  min-height: 100vh;
+  padding: 20rpx 30rpx 40rpx;
+  box-sizing: border-box;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* 表单容器 */
+.feedback-form {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-section {
+  background: linear-gradient(135deg, #FFFFFF, #FAFDFA);
+  border-radius: 28rpx;
+  padding: 40rpx 30rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 8rpx 32rpx rgba(173, 213, 162, 0.15);
+  border: 3rpx solid rgba(173, 213, 162, 0.2);
+  transition: transform 0.3s;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+}
+
+.form-section:active {
+  transform: translateY(-4rpx);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 40rpx;
+  padding-bottom: 24rpx;
+  border-bottom: 2rpx dashed rgba(173, 213, 162, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  width: 100%;
+}
+
+.form-item {
+  margin-bottom: 40rpx;
+  width: 100%;
+}
+
+.item-label {
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+  font-weight: 600;
+  padding-left: 8rpx;
+  position: relative;
+  width: 100%;
+  word-break: keep-all;
+}
+
+.item-label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4rpx;
+  height: 24rpx;
+  background: linear-gradient(to bottom, #ADD5A2, #8BC34A);
+  border-radius: 2rpx;
+}
+
+.form-input {
+  width: 100%;
+  height: 88rpx;
+  border: 3rpx solid rgba(173, 213, 162, 0.3);
+  border-radius: 20rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #FFFFFF, #F8F9FA);
+  transition: all 0.3s;
+}
+
+.form-input:focus {
+  border-color: #ADD5A2;
+  box-shadow: 0 0 0 4rpx rgba(173, 213, 162, 0.2);
+  background: #FFFFFF;
+}
+
+/* ========== 美食类型复选框 - 每行3个 ========== */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.checkbox-row {
+  display: flex;
+  width: 100%;
+  margin-bottom: 20rpx;
+  justify-content: space-between;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx 0;
+  background: linear-gradient(135deg, #F8F9FA, #FFFFFF);
+  border-radius: 20rpx;
+  border: 2rpx solid rgba(173, 213, 162, 0.3);
+  transition: all 0.3s;
+  flex: 1;
+  margin: 0 10rpx;
+  box-sizing: border-box;
+}
+
+.checkbox-row .checkbox-item:first-child {
+  margin-left: 0;
+}
+
+.checkbox-row .checkbox-item:last-child {
+  margin-right: 0;
+}
+
+.checkbox-item:active {
+  background: linear-gradient(135deg, rgba(173, 213, 162, 0.1), rgba(173, 213, 162, 0.05));
+  transform: scale(0.98);
+}
+
+.checkbox-text {
+  font-size: 26rpx;
+  color: #333;
+  margin-left: 16rpx;
+  white-space: nowrap;
+}
+
+checkbox .wx-checkbox-input {
+  width: 36rpx !important;
+  height: 36rpx !important;
+  border-radius: 8rpx !important;
+}
+
+checkbox[checked] .wx-checkbox-input {
+  border-color: #ADD5A2 !important;
+  background-color: #ADD5A2 !important;
+}
+
+/* ========== 推荐程度单选框 - 修改样式 ========== */
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  margin-right: 10rpx;
+  margin-bottom: 20rpx;
+  padding: 20rpx 16rpx;
+  background: linear-gradient(135deg, #F8F9FA, #FFFFFF);
+  border-radius: 20rpx;
+  border: 2rpx solid rgba(173, 213, 162, 0.3);
+  transition: all 0.3s;
+  flex: 1;
+  min-width: calc(50% - 10rpx);
+  max-width: calc(50% - 10rpx);
+  box-sizing: border-box;
+}
+
+.radio-item:nth-child(2n) {
+  margin-right: 0;
+}
+
+.radio-item:active {
+  background: linear-gradient(135deg, rgba(173, 213, 162, 0.1), rgba(173, 213, 162, 0.05));
+  transform: scale(0.98);
+}
+
+/* 去掉emoji后的文字样式 */
+.radio-text {
+  font-size: 26rpx;
+  color: #333;
+  margin-left: 16rpx;
+  white-space: nowrap;  /* 现在没有emoji，可以单行显示 */
+  overflow: hidden;
+  text-overflow: ellipsis;  /* 如果文字太长，显示省略号 */
+  flex: 1;
+  text-align: center;
+  line-height: 1.4;
+}
+
+radio .wx-radio-input {
+  width: 36rpx !important;
+  height: 36rpx !important;
+  border-radius: 8rpx !important;
+  flex-shrink: 0;
+  margin-top: 0;  /* 去掉之前的调整 */
+}
+
+radio[checked] .wx-radio-input {
+  border-color: #ADD5A2 !important;
+  background-color: #ADD5A2 !important;
+}
+
+/* ========== 文本区域 ========== */
+.feedback-textarea {
+  width: 100%;
+  height: 240rpx;
+  border: 3rpx solid rgba(173, 213, 162, 0.3);
+  border-radius: 20rpx;
+  padding: 24rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #FFFFFF, #F8F9FA);
+  line-height: 1.6;
+  transition: all 0.3s;
+}
+
+.feedback-textarea:focus {
+  border-color: #ADD5A2;
+  box-shadow: 0 0 0 4rpx rgba(173, 213, 162, 0.2);
+  background: #FFFFFF;
+}
+
+.word-count {
+  text-align: right;
+  margin-top: 16rpx;
+  width: 100%;
+}
+
+.count-text {
+  font-size: 24rpx;
+  color: #ADD5A2;
+  font-weight: 500;
+}
+
+.error-text {
+  display: block;
+  font-size: 24rpx;
+  color: #FF6B6B;
+  margin-top: 12rpx;
+  padding-left: 8rpx;
+  font-weight: 500;
+  width: 100%;
+  word-break: break-all;
+}
+
+.submit-section {
+  padding: 40rpx 0;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 96rpx;
+  background: linear-gradient(135deg, #ADD5A2, #8BC34A);
+  border-radius: 48rpx;
+  font-size: 34rpx;
+  font-weight: bold;
+  color: white;
+  border: none;
+  box-shadow: 0 12rpx 40rpx rgba(173, 213, 162, 0.4);
+  transition: all 0.3s;
+  box-sizing: border-box;
+}
+
+.button-hover {
+  transform: scale(0.98);
+  box-shadow: 0 8rpx 30rpx rgba(173, 213, 162, 0.3);
+}
+
+.submit-btn[disabled] {
+  background: linear-gradient(135deg, #CCCCCC, #AAAAAA);
+  box-shadow: none;
+}
+
+.submit-tip {
+  display: block;
+  font-size: 24rpx;
+  color: #ADD5A2;
+  margin-top: 20rpx;
+  opacity: 0.8;
+  font-weight: 500;
+  width: 100%;
+}
+
+/* 响应式调整 */
+@media (max-width: 375px) {
+  .feedback-container {
+    padding: 20rpx 20rpx 40rpx;
+  }
+  
+  .section-title {
+    font-size: 28rpx;
+  }
+  
+  .form-input {
+    height: 80rpx;
+    font-size: 26rpx;
+  }
+  
+  .checkbox-text, .radio-text {
+    font-size: 24rpx;
+  }
+  
+  .checkbox-row {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10rpx;
+  }
+  
+  .checkbox-item {
+    min-width: calc(50% - 5rpx);
+    max-width: calc(50% - 5rpx);
+    margin: 0;
+    margin-bottom: 10rpx;
+  }
+  
+  .checkbox-row .checkbox-item:first-child,
+  .checkbox-row .checkbox-item:last-child {
+    margin: 0 0 10rpx 0;
+  }
+  
+  /* 小屏幕下单选框改为每行1个 */
+  .radio-item {
+    min-width: 100%;
+    max-width: 100%;
+    margin-right: 0;
+    margin-bottom: 15rpx;
+  }
+  
+  .radio-item:nth-child(2n) {
+    margin-right: 0;
+  }
+  
+  .radio-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* 加载动画 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.form-section {
+  animation: fadeIn 0.5s ease-out;
+  animation-fill-mode: both;
+}
+
+.form-section:nth-child(1) { animation-delay: 0.1s; }
+.form-section:nth-child(2) { animation-delay: 0.2s; }
+.form-section:nth-child(3) { animation-delay: 0.3s; }
+
+/* 装饰性元素 */
+.feedback-container::before {
+  position: fixed;
+  bottom: 40rpx;
+  left: 40rpx;
+  font-size: 60rpx;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: -1;
+}

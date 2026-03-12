@@ -1,0 +1,109 @@
+<!-- pages/videos/videos.wxml -->
+<navigation-bar 
+  title="美食视频" 
+  back="{{false}}" 
+  background="#ADD5A2" 
+  color="#FFFFFF">
+</navigation-bar>
+
+<view class="videos-container">
+  
+  <!-- 视频列表 -->
+  <view class="video-list" wx:if="{{videoList.length > 0}}">
+    <view class="video-item" wx:for="{{videoList}}" wx:key="id">
+      <!-- 视频卡片 -->
+      <view class="video-card">
+        <!-- 作者信息和日期 -->
+        <view class="video-header">
+          <view class="author-info">
+            <image src="{{item.authorAvatar || '/images/profile/xigua.jpg'}}" class="author-avatar" />
+            <text class="author-name">{{item.author}}</text>
+          </view>
+          <text class="video-date">{{item.date}}</text>
+        </view>
+        
+        <!-- 视频标题 -->
+        <view class="video-title-container">
+          <text class="video-title">{{item.title}}</text>
+        </view>
+        
+        <!-- 视频播放器区域 -->
+        <view class="video-player-container">
+          <video 
+            wx:if="{{currentVideoId === item.id}}"
+            src="{{item.url}}" 
+            controls="{{true}}"
+            autoplay="{{true}}"
+            class="video-player"
+            id="video{{item.id}}"
+            enable-play-gesture="{{true}}"
+            show-center-play-btn="{{true}}"
+            show-fullscreen-btn="{{true}}"
+            show-play-btn="{{true}}"
+            enable-progress-gesture="{{true}}"
+            object-fit="contain"
+            bindplay="onVideoPlay"
+            bindpause="onVideoPause"
+            bindended="onVideoEnd"
+            bindfullscreenchange="onFullscreenChange"
+            binderror="onVideoError"
+          />
+          
+          <!-- 视频封面（未播放时显示） -->
+          <view wx:else class="video-cover" bindtap="handleVideoPlay" data-video="{{item}}">
+            <image src="{{item.cover}}" mode="aspectFill" class="cover-image" />
+            <view class="play-overlay">
+              <view class="play-icon">
+                <image src="https://img.icons8.com/ios-filled/60/FFFFFF/play-button-circled.png" />
+              </view>
+              <text class="video-duration-overlay">{{item.duration}}</text>
+            </view>
+          </view>
+        </view>
+        
+        <!-- 视频描述和标签 -->
+        <view class="video-description">
+          <text class="video-desc">{{item.description}}</text>
+          <view class="video-tags">
+            <text class="tag" wx:for="{{item.tags}}" wx:key="*this">{{item}}</text>
+          </view>
+        </view>
+        
+        <!-- 视频操作栏 -->
+        <view class="video-actions">
+          <!-- 点赞按钮 -->
+          <view class="action-item" bindtap="onLikeVideo" data-id="{{item.id}}" catchtap>
+            <image 
+              src="{{item.liked ? 'https://img.icons8.com/ios-filled/32/FFB6C1/hearts.png' : 'https://img.icons8.com/ios/32/666666/hearts.png'}}" 
+              class="action-icon like-icon" />
+            <text class="action-count">{{item.likeCount || 0}}</text>
+          </view>
+          
+          <!-- 分享按钮 -->
+          <view class="action-item" bindtap="onShareVideo" data-video="{{item}}" catchtap>
+            <image src="https://img.icons8.com/ios/32/666666/forward-arrow.png" class="action-icon" />
+          </view>
+          
+          <!-- 收藏按钮 -->
+          <view class="action-item" bindtap="onCollectVideo" data-id="{{item.id}}" catchtap>
+            <image 
+              src="{{item.collected ? 'https://img.icons8.com/ios-filled/32/ADD5A2/bookmark-ribbon.png' : 'https://img.icons8.com/ios/32/666666/bookmark-ribbon.png'}}" 
+              class="action-icon" />
+          </view>
+          
+          <!-- 播放统计 -->
+          <view class="view-stats">
+            <image src="https://img.icons8.com/ios/20/666666/visible.png" />
+            <text>{{item.viewCount || 0}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 悬浮操作按钮 -->
+  <view class="floating-btn" bindtap="onRecordVideo">
+    <image src="https://img.icons8.com/ios-filled/40/FFFFFF/camera.png" class="floating-icon" />
+    <text class="floating-text">拍Vlog</text>
+  </view>
+</view>

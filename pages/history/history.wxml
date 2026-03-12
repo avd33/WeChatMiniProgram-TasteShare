@@ -1,0 +1,72 @@
+<!-- pages/history/history.wxml -->
+<navigation-bar 
+  title="浏览历史" 
+  back="{{true}}"
+  background="#ADD5A2" 
+  color="#FFFFFF"
+></navigation-bar>
+
+<view class="history-container">
+  
+  <!-- 筛选标签 -->
+  <view class="filter-tabs">
+    <scroll-view class="filter-scroll" scroll-x>
+      <view class="filters">
+        <view 
+          wx:for="{{filterTypes}}" 
+          wx:key="id"
+          class="filter-item {{activeType === item.id ? 'active' : ''}}"
+          data-type="{{item.id}}"
+          bindtap="filterHistory"
+        >
+          <text class="filter-icon">{{item.icon}}</text>
+          <text class="filter-text">{{item.name}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 操作栏 -->
+  <view class="action-bar" wx:if="{{historyList.length > 0}}">
+    <text class="total-count">共 {{historyList.length}} 条记录</text>
+    <text class="clear-btn" bindtap="clearHistory">清空历史</text>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{historyList.length === 0 && !isLoading}}">
+    <image src="https://img.icons8.com/ios/100/cccccc/clock.png" class="empty-icon" />
+    <text class="empty-text">暂无浏览历史</text>
+    <text class="empty-tip">去首页看看喜欢的美食吧~</text>
+  </view>
+
+  <!-- 历史记录列表 -->
+  <scroll-view 
+  class="history-list" 
+  scroll-y
+  enable-back-to-top
+  wx:if="{{historyList.length > 0}}"
+>
+  <view 
+    class="history-item" 
+    wx:for="{{historyList}}" 
+    wx:key="index"
+  >
+    <view class="item-left">
+      <text class="type-icon">{{getTypeIcon(item.type)}}</text>
+      <view class="item-info">
+        <text class="item-title">
+          {{item.data.name || item.data.title || getTypeName(item.type)}}
+        </text>
+        <text class="item-type">{{getTypeName(item.type)}}</text>
+      </view>
+    </view>
+    
+    <view class="item-right">
+      <view class="delete-btn" bindtap="deleteHistoryItem" data-index="{{index}}" catchtap>
+        <text>删除</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+</view>

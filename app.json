@@ -1,0 +1,57 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/photos/photos",
+    "pages/videos/videos",
+    "pages/feedback/feedback",
+    "pages/profile/profile",
+    "pages/favorites/favorites",
+    "pages/feedbackHistory/feedbackHistory",
+    "pages/hotpot/hotpot"
+  ],
+  "window": {
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#ADD5A2",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "boxShadow": "0 -2rpx 20rpx rgba(0, 0, 0, 0.05)",
+    "list": [
+      {
+        "pagePath": "pages/photos/photos",
+        "text": "晒图",
+        "iconPath": "images/tab/tab_photo.png",
+        "selectedIconPath": "images/tab/tab_photo_active.png"
+      },
+      {
+        "pagePath": "pages/videos/videos",
+        "text": "视频",
+        "iconPath": "images/tab/tab_video.png",
+        "selectedIconPath": "images/tab/tab_video_active.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/tab/tab_home.png",
+        "selectedIconPath": "images/tab/tab_home_active.png"
+      },
+      {
+        "pagePath": "pages/feedback/feedback",
+        "text": "食评",
+        "iconPath": "images/tab/tab_feedback.png",
+        "selectedIconPath": "images/tab/tab_feedback_active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/tab/tab_profile.png",
+        "selectedIconPath": "images/tab/tab_profile_active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

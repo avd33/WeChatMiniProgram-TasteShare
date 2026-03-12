@@ -1,0 +1,655 @@
+/* pages/index/index.wxss */
+page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #F0F9F0, #E8F5E8);
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', STHeiti, 'Microsoft Yahei', Tahoma, SimSun, sans-serif;
+}
+
+/* 内容区域 */
+.page-content {
+  flex: 1;
+  padding: 20rpx 24rpx 40rpx;
+  box-sizing: border-box;
+}
+
+/* 轮播图 */
+.swiper-container {
+  border-radius: 40rpx !important; 
+  overflow: hidden;
+  margin-bottom: 30rpx;
+  box-shadow: 0 20rpx 60rpx rgba(173, 213, 162, 0.4); 
+  border: 6rpx solid #ffffff; 
+  position: relative;
+}
+
+.swiper-container::after {
+  position: absolute;
+  top: 20rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 182, 193, 0.95); 
+  color: white;
+  font-size: 24rpx;
+  padding: 8rpx 24rpx;
+  border-radius: 30rpx;
+  z-index: 10;
+  font-weight: bold;
+  letter-spacing: 2rpx;
+}
+
+swiper {
+  height: 422rpx !important; /* 直接控制 swiper 高度 */
+  display: block;
+  width: 100%;
+}
+
+/* 确保图片填满 swiper-item */
+swiper-item {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.wx-swiper-dot-active {
+  background: #FFD166 !important; 
+  width: 40rpx !important;
+  border-radius: 10rpx !important;
+}
+
+/* 搜索栏容器 */
+.search-bar-container {
+  padding: 0 20rpx 32rpx; /* 底部间距与下方模块统一 */
+}
+
+/* 搜索栏主体 */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  border-radius: 40rpx;
+  padding: 24rpx 32rpx;
+  box-shadow: 0 12rpx 40rpx rgba(173, 213, 162, 0.2);
+  border: 3rpx solid rgba(173, 213, 162, 0.25);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 点击反馈效果 */
+.search-bar:active {
+  transform: translateY(-2rpx);
+  box-shadow: 0 16rpx 48rpx rgba(173, 213, 162, 0.3);
+  border-color: #ADD5A2;
+}
+
+/* 搜索栏内部布局 */
+.search-bar-inner {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* 搜索图标样式 */
+.search-icon {
+  font-size: 36rpx;
+  margin-right: 20rpx;
+  color: #ADD5A2;
+  opacity: 0.9;
+}
+
+/* 搜索框占位文本样式 */
+.search-placeholder {
+  font-size: 30rpx;
+  color: #999;
+  flex: 1;
+}
+
+.entry-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 15rpx;
+  flex: 1;
+  min-width: 160rpx;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.entry-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(173, 213, 162, 0.08);
+  border-radius: 24rpx;
+  transform: scale(0.95);
+  transition: all 0.3s ease;
+  z-index: -1;
+}
+
+.entry-item:active {
+  transform: translateY(6rpx) scale(0.98);
+}
+
+.entry-item:active::before {
+  background: rgba(173, 213, 162, 0.15);
+  transform: scale(1);
+}
+
+.entry-item .category-emoji {
+  font-size: 64rpx;
+  margin-bottom: 20rpx;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-block;
+  text-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.entry-item:active .category-emoji {
+  transform: scale(1.2) rotate(5deg);
+}
+
+.entry-text {
+  font-size: 28rpx;
+  color: #4A4A4A;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 1rpx;
+  position: relative;
+  padding: 6rpx 12rpx;
+  background: linear-gradient(to bottom, #FFFFFF, #F8F9FA);
+  border-radius: 12rpx;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 美食分类标题 */
+.category-title {
+  font-size: 36rpx;
+  font-weight: 800;
+  color: #4A4A4A;
+  margin-bottom: 28rpx;
+  padding-left: 12rpx;
+  position: relative;
+  display: inline-block;
+}
+
+/* 美食分类九宫格 */
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background: #FFFFFF;
+  border-radius: 32rpx;
+  padding: 40rpx 32rpx;
+  margin-bottom: 32rpx;
+  box-shadow: 
+    0 16rpx 48rpx rgba(173, 213, 162, 0.18),
+    0 0 0 3rpx #FFFFFF;
+  position: relative;
+  overflow: hidden;
+}
+
+.grid-container::before {
+  content: '✨';
+  position: absolute;
+  top: -10rpx;
+  right: 20rpx;
+  font-size: 36rpx;
+  opacity: 0.3;
+  animation: twinkle 3s infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 31%;
+  margin-bottom: 36rpx;
+  padding: 24rpx 0;
+  background: linear-gradient(135deg, rgba(173, 213, 162, 0.08), rgba(173, 213, 162, 0.02));
+  border-radius: 24rpx;
+  border: 3rpx solid rgba(173, 213, 162, 0.15);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.grid-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6rpx;
+  background: linear-gradient(90deg, #FFB6C1, #ADD5A2);
+  border-radius: 24rpx 24rpx 0 0;
+}
+
+.grid-item:active {
+  transform: translateY(-8rpx) scale(1.05);
+  border-color: #ADD5A2;
+  box-shadow: 
+    0 12rpx 32rpx rgba(173, 213, 162, 0.3),
+    0 0 0 2rpx rgba(173, 213, 162, 0.1);
+}
+
+.grid-item:active .emoji-container {
+  transform: scale(1.15) rotate(10deg);
+}
+
+/* emoji容器 */
+.emoji-container {
+  width: 96rpx;
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20rpx;
+  background: linear-gradient(135deg, rgba(173, 213, 162, 0.15), rgba(173, 213, 162, 0.05));
+  border-radius: 50%;
+  border: 4rpx solid rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    0 8rpx 24rpx rgba(173, 213, 162, 0.2),
+    inset 0 0 20rpx rgba(255, 255, 255, 0.5);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.emoji-container::after {
+  content: '';
+  position: absolute;
+  top: -2rpx;
+  left: -2rpx;
+  right: -2rpx;
+  bottom: -2rpx;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.category-emoji {
+  font-size: 56rpx;
+  line-height: 1;
+  display: block;
+  filter: drop-shadow(0 2rpx 4rpx rgba(0, 0, 0, 0.1));
+}
+
+.grid-text {
+  font-size: 26rpx;
+  color: #5A5A5A;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 1rpx;
+  padding: 8rpx 16rpx;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 推荐美食列表 */
+.shop-list-section {
+  margin-bottom: 40rpx;
+}
+
+.section-title {
+  font-size: 36rpx;
+  font-weight: 800;
+  color: #4A4A4A;
+  margin-bottom: 28rpx;
+  padding-left: 12rpx;
+  position: relative;
+  display: inline-block;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 120rpx 40rpx;
+  background: #FFFFFF;
+  border-radius: 32rpx;
+  box-shadow: 
+    0 16rpx 48rpx rgba(173, 213, 162, 0.15),
+    0 0 0 3rpx rgba(173, 213, 162, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.empty-state::before {
+  content: '🍽️';
+  font-size: 100rpx;
+  display: block;
+  margin-bottom: 30rpx;
+  opacity: 0.3;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20rpx); }
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #888;
+  font-weight: 500;
+}
+
+/* 美食列表卡片 */
+.shop-list {
+  background: #FFFFFF;
+  border-radius: 32rpx;
+  overflow: hidden;
+  box-shadow: 
+    0 16rpx 48rpx rgba(173, 213, 162, 0.15),
+    0 0 0 3rpx rgba(255, 255, 255, 0.8);
+}
+
+.shop-item {
+  position: relative;
+  display: flex;
+  padding: 36rpx 32rpx;
+  border-bottom: 2rpx dashed rgba(173, 213, 162, 0.2);
+  transition: all 0.3s ease;
+}
+
+.shop-item:last-child {
+  border-bottom: none;
+}
+
+.shop-item:active {
+  background: rgba(173, 213, 162, 0.04);
+  padding-left: 40rpx;
+}
+
+/* 收藏按钮样式 - 卡通爱心 */
+.favorite-btn {
+  position: absolute;
+  top: 28rpx;
+  right: 32rpx;
+  z-index: 100;
+  width: 72rpx;
+  height: 72rpx;
+  background: linear-gradient(135deg, #FFFFFF, #F8F9FA);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 8rpx 24rpx rgba(255, 182, 193, 0.3),
+    0 0 0 3rpx rgba(255, 255, 255, 0.9);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.favorite-btn:active {
+  transform: scale(0.85) rotate(15deg);
+  box-shadow: 
+    0 4rpx 16rpx rgba(255, 182, 193, 0.4),
+    0 0 0 3rpx rgba(255, 255, 255, 0.9);
+}
+
+.favorite-icon {
+  width: 36rpx;
+  height: 36rpx;
+  transition: all 0.3s ease;
+}
+
+.shop-cover {
+  width: 240rpx;
+  height: 180rpx;
+  border-radius: 20rpx;
+  margin-right: 32rpx;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #F5F5F5, #EAEAEA);
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.shop-item:active .shop-cover {
+  transform: scale(1.02);
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.12);
+}
+
+.shop-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.shop-name {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 16rpx;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+  padding-left: 8rpx;
+}
+
+.shop-name::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4rpx;
+  height: 24rpx;
+  background: linear-gradient(to bottom, #ADD5A2, #8BC34A);
+  border-radius: 2rpx;
+}
+
+.shop-address {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+  line-height: 1.4;
+  padding-left: 8rpx;
+}
+
+.shop-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  padding-left: 8rpx;
+}
+
+.shop-phone, .shop-hours {
+  font-size: 26rpx;
+  color: #888;
+  display: flex;
+  align-items: center;
+}
+
+.shop-phone::before, .shop-hours::before {
+  content: '';
+  display: inline-block;
+  width: 6rpx;
+  height: 6rpx;
+  background: #ADD5A2;
+  border-radius: 50%;
+  margin-right: 12rpx;
+}
+
+/* 加载动画 */
+.loading-spinner {
+  display: inline-block;
+  width: 48rpx;
+  height: 48rpx;
+  border: 5rpx solid rgba(173, 213, 162, 0.2);
+  border-top: 5rpx solid #ADD5A2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  vertical-align: middle;
+  box-shadow: 0 4rpx 12rpx rgba(173, 213, 162, 0.2);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 加载更多 */
+.load-more {
+  margin-top: 40rpx;
+}
+
+.load-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24rpx;
+  padding: 36rpx;
+  background: #FFFFFF;
+  border-radius: 28rpx;
+  box-shadow: 
+    0 12rpx 40rpx rgba(173, 213, 162, 0.15),
+    0 0 0 3rpx rgba(255, 255, 255, 0.9);
+  position: relative;
+  overflow: hidden;
+}
+
+.load-content::before {
+  content: '🍜';
+  position: absolute;
+  right: 20rpx;
+  bottom: 20rpx;
+  font-size: 40rpx;
+  opacity: 0.1;
+}
+
+.load-text {
+  font-size: 32rpx;
+  color: #ADD5A2;
+  font-weight: 600;
+  letter-spacing: 2rpx;
+}
+
+/* 没有更多 */
+.no-more {
+  text-align: center;
+  padding: 48rpx 0;
+  font-size: 28rpx;
+  color: #AAA;
+  background: #FFFFFF;
+  border-radius: 28rpx;
+  margin-top: 32rpx;
+  box-shadow: 
+    0 12rpx 40rpx rgba(173, 213, 162, 0.1),
+    0 0 0 3rpx rgba(255, 255, 255, 0.9);
+  position: relative;
+}
+
+.no-more::before, .no-more::after {
+  content: '🍽️';
+  position: absolute;
+  top: 50%;
+  font-size: 32rpx;
+  opacity: 0.3;
+  transform: translateY(-50%);
+}
+
+.no-more::before {
+  left: 40rpx;
+}
+
+.no-more::after {
+  right: 40rpx;
+}
+
+.no-more-text {
+  position: relative;
+  display: inline-block;
+  padding: 0 60rpx;
+  background: linear-gradient(135deg, rgba(173, 213, 162, 0.05), rgba(173, 213, 162, 0.1));
+  border-radius: 24rpx;
+  padding: 16rpx 40rpx;
+}
+
+/* 响应式调整 */
+@media (max-width: 375px) {
+  .grid-text {
+    font-size: 24rpx;
+  }
+  
+  .entry-text {
+    font-size: 26rpx;
+  }
+  
+  .shop-name {
+    font-size: 32rpx;
+  }
+  
+  .shop-address {
+    font-size: 26rpx;
+  }
+  
+  .emoji-container {
+    width: 88rpx;
+    height: 88rpx;
+  }
+  
+  .category-emoji {
+    font-size: 52rpx;
+  }
+}
+
+/* 卡片悬停效果 */
+.swiper-container,
+.quick-entry,
+.grid-container,
+.shop-list,
+.load-content,
+.no-more,
+.empty-state {
+  transition: box-shadow 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 可爱的装饰元素 */
+.grid-item:nth-child(1) .emoji-container::before,
+.grid-item:nth-child(5) .emoji-container::before,
+.grid-item:nth-child(9) .emoji-container::before {
+  content: '✨';
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+  font-size: 20rpx;
+  animation: sparkle 2s infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+/* 背景装饰 */
+.page-content::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(173, 213, 162, 0.03) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(255, 182, 193, 0.03) 0%, transparent 20%),
+    radial-gradient(circle at 50% 50%, rgba(255, 209, 102, 0.02) 0%, transparent 30%);
+  pointer-events: none;
+  z-index: -1;
+}
